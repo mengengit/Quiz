@@ -9,9 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-    //@IBOutlet var questionLabel: UILabel!
     @IBOutlet var currentQuestionLabel: UILabel!
+    @IBOutlet var currentQuestionLabelCenterXConstraint: NSLayoutConstraint!
     @IBOutlet var nextQuestionLabel: UILabel!
+    @IBOutlet var nextQuestionLabelCenterXConstraint: NSLayoutConstraint!
     @IBOutlet var answerLabel: UILabel!
 
     let questions: [String] = [
@@ -58,25 +59,41 @@ class ViewController: UIViewController {
         print("currentQuestionLabel.alpha =  \(currentQuestionLabel.alpha)")
 
         print("Exiting viewDidLoad")
+        
+        updateOffScreenLabel()
+    }
+    
+    func updateOffScreenLabel() {
+        let screenWidth = view.frame.width
+        nextQuestionLabelCenterXConstraint.constant = -screenWidth
     }
     //This method handles animation, declares a closure constant, takes no arguments and returns no value
     func animateLabelTransitions() {
-        //UIView.animate(withDuration: 0.5, animations: {
-        //    self.currentQuestionLabel.alpha = 0
-        //    self.nextQuestionLabel.alpha = 1
-        //})
+        // Force any outstanding layout changes to occur
+        view.layoutIfNeeded()
+        //Animate the alpha
+        //and the center X constraints
+        let screenWidth = view.frame.width
+        self.nextQuestionLabelCenterXConstraint.constant = 0
+        self.currentQuestionLabelCenterXConstraint.constant += screenWidth
+        
         UIView.animate(withDuration: 0.5,
             delay: 0,
-            options: [],
+            options: [.curveLinear], /* If options blank, will ease in/out */
             animations: {
                 self.currentQuestionLabel.alpha = 0
                 self.nextQuestionLabel.alpha = 1
+                
+                self.view.layoutIfNeeded()
             },
             completion: { _ in
                 print("Before swap, currentQuestionLabel.text = \(String(describing: self.currentQuestionLabel.text))")
                 print("Before swap, nextQuestionLabel.text = \(String(describing: self.nextQuestionLabel.text))")
                 swap(&self.currentQuestionLabel,
                      &self.nextQuestionLabel)
+                swap(&self.currentQuestionLabelCenterXConstraint,
+                     &self.nextQuestionLabelCenterXConstraint)
+                self.updateOffScreenLabel()
                 print("After swap, currentQuestionLabel.text = \(String(describing: self.currentQuestionLabel.text))")
                 print("After swap, nextQuestionLabel.text = \(String(describing: self.nextQuestionLabel.text))")
         })

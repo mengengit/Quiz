@@ -58,23 +58,24 @@
                         <constraints>
                             <constraint firstItem="LMN-nr-rfj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="Kec-Yq-YBa"/>
                             <constraint firstItem="m4P-Ju-rsC" firstAttribute="centerX" secondItem="dxY-Qr-3Ft" secondAttribute="centerX" id="WUE-cE-0N9"/>
+                            <constraint firstItem="iSo-TA-kvu" firstAttribute="top" secondItem="LMN-nr-rfj" secondAttribute="top" id="Waj-L1-ggJ"/>
                             <constraint firstItem="Gma-ls-kR9" firstAttribute="top" secondItem="dxY-Qr-3Ft" secondAttribute="bottom" constant="159" id="Xx3-dz-HyV"/>
                             <constraint firstItem="iSo-TA-kvu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZAU-QU-0HL"/>
                             <constraint firstItem="Gma-ls-kR9" firstAttribute="centerX" secondItem="dxY-Qr-3Ft" secondAttribute="centerX" id="cLw-QV-sai"/>
                             <constraint firstItem="dxY-Qr-3Ft" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="foX-XZ-TpA"/>
-                            <constraint firstItem="LMN-nr-rfj" firstAttribute="centerX" secondItem="dxY-Qr-3Ft" secondAttribute="centerX" id="gwi-Wu-9I7"/>
                             <constraint firstItem="m4P-Ju-rsC" firstAttribute="top" secondItem="Gma-ls-kR9" secondAttribute="bottom" constant="19" id="mox-Pu-pDj"/>
                             <constraint firstItem="LMN-nr-rfj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pPm-bJ-Y6Y"/>
                             <constraint firstItem="m4P-Ju-rsC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rbv-WF-l6m"/>
                             <constraint firstItem="Gma-ls-kR9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rlM-8o-ryl"/>
-                            <constraint firstItem="iSo-TA-kvu" firstAttribute="top" secondItem="LMN-nr-rfj" secondAttribute="top" id="uIq-nd-4WZ"/>
                             <constraint firstItem="dxY-Qr-3Ft" firstAttribute="top" secondItem="LMN-nr-rfj" secondAttribute="bottom" constant="25" id="uRn-n3-EKp"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="answerLabel" destination="Gma-ls-kR9" id="xyP-hA-trr"/>
                         <outlet property="currentQuestionLabel" destination="LMN-nr-rfj" id="4HD-XC-Khk"/>
+                        <outlet property="currentQuestionLabelCenterXConstraint" destination="pPm-bJ-Y6Y" id="nyt-G9-HlV"/>
                         <outlet property="nextQuestionLabel" destination="iSo-TA-kvu" id="YVm-Vh-2kh"/>
+                        <outlet property="nextQuestionLabelCenterXConstraint" destination="ZAU-QU-0HL" id="O76-r6-boc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
