@@ -9,7 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet var questionLabel: UILabel!
+    //@IBOutlet var questionLabel: UILabel!
+    @IBOutlet var currentQuestionLabel: UILabel!
+    @IBOutlet var nextQuestionLabel: UILabel!
     @IBOutlet var answerLabel: UILabel!
 
     let questions: [String] = [
@@ -26,41 +28,69 @@ class ViewController: UIViewController {
     var currentQuestionIndex: Int = 0
     
     @IBAction func showNextQuestion(_ sender: UIButton) {
+        print("Starting showNextQuestion")
+
         currentQuestionIndex += 1
         if currentQuestionIndex == questions.count {
             currentQuestionIndex = 0
         }
         
         let question: String = questions[currentQuestionIndex]
-        questionLabel.text = question
+        nextQuestionLabel.text = question
         answerLabel.text = "???"
-        
+        print("\tAlpha currently \(nextQuestionLabel.alpha)")
+        animateLabelTransitions()
+        print("\tAlpha currently \(nextQuestionLabel.alpha)")
+        print("Exiting showNextQuestion")
     }
     
     @IBAction func showAnswer(_ sender: UIButton) {
+        print("Starting showAnswer")
         let answer: String = answers[currentQuestionIndex]
         answerLabel.text = answer
-        
+        print("Exiting showAnswer")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        questionLabel.text = questions[currentQuestionIndex]
+        print("Starting viewDidLoad")
+        //questionLabel.text = questions[currentQuestionIndex]
+        currentQuestionLabel.text = questions[currentQuestionIndex]
+        print("currentQuestionLabel.alpha =  \(currentQuestionLabel.alpha)")
+
+        print("Exiting viewDidLoad")
     }
     //This method handles animation, declares a closure constant, takes no arguments and returns no value
     func animateLabelTransitions() {
-        let animationCLosure = {() -> Void in
-            self.questionLabel.alpha = 1
-            
-        }
-        UIView.animate(withDuration: 0.5, animations: animationCLosure)
+        //UIView.animate(withDuration: 0.5, animations: {
+        //    self.currentQuestionLabel.alpha = 0
+        //    self.nextQuestionLabel.alpha = 1
+        //})
+        UIView.animate(withDuration: 0.5,
+            delay: 0,
+            options: [],
+            animations: {
+                self.currentQuestionLabel.alpha = 0
+                self.nextQuestionLabel.alpha = 1
+            },
+            completion: { _ in
+                print("Before swap, currentQuestionLabel.text = \(String(describing: self.currentQuestionLabel.text))")
+                print("Before swap, nextQuestionLabel.text = \(String(describing: self.nextQuestionLabel.text))")
+                swap(&self.currentQuestionLabel,
+                     &self.nextQuestionLabel)
+                print("After swap, currentQuestionLabel.text = \(String(describing: self.currentQuestionLabel.text))")
+                print("After swap, nextQuestionLabel.text = \(String(describing: self.nextQuestionLabel.text))")
+        })
     }
-    /*
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("Starting viewWillAppear")
+        print("Alpha currently \(nextQuestionLabel.alpha)")
+        nextQuestionLabel.alpha = 0
         // Set the label's initial alpha
-        questionLabel.alpha = 0
+        print("Alpha currently \(nextQuestionLabel.alpha)")
+
+        print("Exiting viewWillAppear")
     }
- */
+ 
 }
 
